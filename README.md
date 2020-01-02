@@ -1,5 +1,4 @@
 # r.arc
-Arc Init
 Layered Architecture
 
 
