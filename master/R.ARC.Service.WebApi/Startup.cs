@@ -12,8 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using R.ARC.Common.Setting;
@@ -26,13 +24,11 @@ using R.ARC.Web.Api.Autofac.Settings;
 using R.ARC.Web.Api.Settings;
 using R.ARC.Web.Api.Settings.Autofac;
 using R.ARC.Web.Api.Settings.JWT;
-using R.ARC.Web.Api.Swagger;
+using R.ARC.Web.Api.Settings.Swagger;
 using SAM.Service.WebApi.Helpers;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.IO;
 using System.IO.Compression;
-using System.Reflection;
 using System.Text;
 
 namespace R.ARC.Web.Api
@@ -98,7 +94,7 @@ namespace R.ARC.Web.Api
                 {
                     #region Jwt
 
-                    services.ConfigureJwt(_appSettings, ConfigureSecurityKey);
+                    services.ConfigureJwt(_appSettings);
                     #endregion
 
                     #region ArchitectNow MongoDB & Fuluentvalidation
@@ -159,14 +155,7 @@ namespace R.ARC.Web.Api
                     #region Swagger
                     if (_appSettings.Swagger.Enabled)
                     {
-                        services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-
-                        services.AddSwaggerGen(options =>
-                        {
-                            options.OperationFilter<SwaggerDefaultValues>();
-                            options.IncludeXmlComments(XmlCommentsFilePath);
-                        });
-                        services.AddSwaggerGen();
+                        services.ConfigureSwagger();
                     }
                     #endregion
 
@@ -182,7 +171,7 @@ namespace R.ARC.Web.Api
                     #endregion
                 }
 
-                
+
                 _applicationContainer = services.CreateAutofacContainer((builder, serviceCollection) =>
                 {
                     // builder.RegisterLogger(); for serilog
@@ -228,6 +217,8 @@ namespace R.ARC.Web.Api
             try
             {
 
+                app.UseRouting();
+
                 app.UseFileServer();
 
                 #region UploadsPath
@@ -251,8 +242,6 @@ namespace R.ARC.Web.Api
                 loggerFactory.AddDLogger(Configuration.GetSection("Logging"), logWriter);
                 #endregion
 
-                int sirketId = Configuration.GetSection("AppParameters").GetValue<int>("CompanyId");
-
                 #region UseDeveloperExceptionPage
                 if (env.IsDevelopment())
                 {
@@ -261,25 +250,15 @@ namespace R.ARC.Web.Api
                 #endregion
 
                 app.UseHttpsRedirection();
-
                 app.UseCors(b => b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
-                app.UseAuthentication();
-
                 app.UseResponseCompression();
-
-                app.UseMiddleware(typeof(SetSessionMiddleware));
-
-                IMemoryCache cache = app.ApplicationServices.GetService<IMemoryCache>();
-
-            
-                app.UseRouting();
+                app.UseAuthentication();
+                app.UseMiddleware(typeof(SetSessionMiddleware)); // *located for getting user info after JWT token read - ridvan
                 app.UseAuthorization();
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
                 });
-
 
 
                 app.UseRequestLocalization();
@@ -296,22 +275,14 @@ namespace R.ARC.Web.Api
                 //    });
                 //}
                 #endregion
-                
+
                 #region Swagger
 
                 if (_appSettings.IsValid())
                 {
                     if (_appSettings.Swagger.Enabled)
                     {
-                        app.UseSwagger();
-                        app.UseSwaggerUI(options =>
-                        {
-                            foreach (var description in provider.ApiVersionDescriptions)
-                            {
-                                options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-                                options.RoutePrefix = string.Empty;
-                            }
-                        });
+                        app.ConfigureSwagger(provider);
                     }
                 }
                 #endregion
@@ -323,22 +294,8 @@ namespace R.ARC.Web.Api
             }
         }
 
-        string XmlCommentsFilePath
-        {
-            get
-            {
-                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
-                return Path.Combine(basePath, fileName);
-            }
-        }
+      
 
-        private JwtSigningKey ConfigureSecurityKey(JwtIssuerOptions issuerOptions)
-        {
-            var keyString = issuerOptions.Audience;
-            var keyBytes = Encoding.Unicode.GetBytes(keyString);
-            var signingKey = new JwtSigningKey(keyBytes);
-            return signingKey;
-        }
+        
     }
 }

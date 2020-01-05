@@ -4,6 +4,9 @@ using System.IO;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
+using System.Linq;
+using R.ARC.Web.Api.Services;
 
 namespace SAM.Service.WebApi.Helpers
 {
@@ -19,7 +22,7 @@ namespace SAM.Service.WebApi.Helpers
 
         public  async Task Invoke(HttpContext context, ISessionManager sessionManager)
         {
-            sessionManager.UserName = ((ClaimsIdentity)context.User.Identity).Name;
+            sessionManager.UserName = context.User.GetUserInformation().UserName;
             sessionManager.IpAddress = context.Connection.RemoteIpAddress.ToString();
             sessionManager.RequestUrl = context.Request.Host + context.Request.Path;
             sessionManager.RequestBody = await GetRequestBody(context);

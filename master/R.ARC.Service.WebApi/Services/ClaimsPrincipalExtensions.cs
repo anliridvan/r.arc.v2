@@ -18,7 +18,7 @@ namespace R.ARC.Web.Api.Services
 
             var userInformation = new UserBasicModel
             {
-                Email = identityName
+                UserName = identityName
             };
 
             if (int.TryParse(idValue, out var id)) userInformation.Id = id;

@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-//using NSwag.Annotations;
 using R.ARC.Common.Contract;
+using R.ARC.Common.Helper.Models;
 using R.ARC.Common.Helper.Models.Exceptions;
 using R.ARC.Core.Business.Application;
 using R.ARC.Web.Api.Settings.JWT;
@@ -36,8 +37,8 @@ namespace R.ARC.Web.Api.Controllers.V1
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        //[SwaggerResponse(HttpStatusCode.OK, typeof(LoginResultVm))]
-        //[SwaggerResponse(HttpStatusCode.BadRequest, typeof(ApiError))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LoginResultModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiError))]
         public async Task<IActionResult> Login([FromBody] LoginModel parameters)
         {
             return await ServiceInvoker.AsyncOk(async () =>
@@ -67,8 +68,8 @@ namespace R.ARC.Web.Api.Controllers.V1
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        //[SwaggerResponse(HttpStatusCode.OK, typeof(LoginResultVm))]
-        //[SwaggerResponse(HttpStatusCode.BadRequest, typeof(ApiError))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiError))]
         public async Task<IActionResult> Register([FromBody] UserModel parameters)
         {
             return await ServiceInvoker.AsyncOk(async () => await _UserApp.CreateAsync(parameters, parameters.Password));

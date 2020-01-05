@@ -1,28 +1,35 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using R.ARC.Common.Contract;
+using R.ARC.Common.Helper.Models;
+using R.ARC.Web.Api.Controllers;
+using R.ARC.Web.Api.Services;
 using System;
 using System.Threading.Tasks;
 
 namespace CoreAPI1.API.Controllers.V1
 {
     [ApiVersion("1.0")]
-    [Route("api/users")]//required for default versioning
-    [Route("api/v{version:apiVersion}/users")]
-    [ApiController]
-    public class UserController : Controller
+    public class UserController : BaseController<UserController>
     {
 
-        #region GET
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(string))]
-        [Microsoft.AspNetCore.Mvc.HttpGet]
-        public async Task<string> Get()
+        public UserController(IServiceProvider serviceProvider) : base(serviceProvider)
         {
 
-                return null;
         }
-        #endregion
+
+        /// <summary>
+        ///     Secure method used to test security
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserBasicModel))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(ApiError))]
+        public async Task<IActionResult> Get()
+        {
+            return await ServiceInvoker.AsyncOk(() => Task.FromResult(HttpContext.User.GetUserInformation()));
+        }
+
 
     }
 }

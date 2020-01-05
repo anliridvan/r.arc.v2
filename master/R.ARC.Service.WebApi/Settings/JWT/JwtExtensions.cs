@@ -4,14 +4,14 @@ using Microsoft.IdentityModel.Tokens;
 using R.ARC.Common.Setting;
 using System;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace R.ARC.Web.Api.Settings.JWT
 {
     public static class JwtExtensions
     {
-        public static void ConfigureJwt(this IServiceCollection services, AppSettings _appSettings,
-            Func<JwtIssuerOptions, JwtSigningKey> signingKey, JwtBearerEvents jwtBearerEvents = null)
+        public static void ConfigureJwt(this IServiceCollection services, AppSettings _appSettings)
         {
             var jwtAppSettingOptions = _appSettings.JwtIssuerOptions.IsValid() ?
                 new JwtIssuerOptions
@@ -21,7 +21,7 @@ namespace R.ARC.Web.Api.Settings.JWT
                 }
                 : new JwtIssuerOptions();
 
-            var issuerSigningKey = signingKey(jwtAppSettingOptions);
+            var issuerSigningKey = ConfigureSecurityKey(jwtAppSettingOptions);
 
             services.AddSingleton(issuerSigningKey);
 
@@ -50,21 +50,30 @@ namespace R.ARC.Web.Api.Settings.JWT
                 .AddJwtBearer(options =>
                 {
                     options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
                     options.TokenValidationParameters = tokenValidationParameters;
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnMessageReceived = context =>
-                        {
-                            var task = Task.Run(() =>
-                            {
-                                if (context.Request.Query.TryGetValue("securityToken", out var securityToken))
-                                    context.Token = securityToken.FirstOrDefault();
-                            });
+                    //options.Events = new JwtBearerEvents
+                    //{
+                    //    OnMessageReceived = context =>
+                    //    {
+                    //        var task = Task.Run(() =>
+                    //        {
+                    //            if (context.Request.Query.TryGetValue("securityToken", out var securityToken))
+                    //                context.Token = securityToken.FirstOrDefault();
+                    //        });
 
-                            return task;
-                        }
-                    };
+                    //        return task;
+                    //    }
+                    //};
                 });
+        }
+
+        private static JwtSigningKey ConfigureSecurityKey(JwtIssuerOptions issuerOptions)
+        {
+            var keyString = issuerOptions.Audience;
+            var keyBytes = Encoding.Unicode.GetBytes(keyString);
+            var signingKey = new JwtSigningKey(keyBytes);
+            return signingKey;
         }
     }
 }
