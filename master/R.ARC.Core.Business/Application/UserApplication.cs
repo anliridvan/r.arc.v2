@@ -15,8 +15,6 @@ namespace R.ARC.Core.Business.Application
             _userDom = serviceProvider.GetService<IUserDomain>();
         }
 
-
-
         public Task<UserModel> AuthenticateAsync(string username, string password)
         {
             return _userDom.AuthenticateAsync(username, password);
