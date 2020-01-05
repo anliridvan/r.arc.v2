@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Core.DataAccess", "R.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Core.Business", "R.ARC.Core.Business\R.ARC.Core.Business.csproj", "{C82A1B07-2B61-4ABE-A42F-AC1FFF7885E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Web.Api", "R.ARC.Service.WebApi\R.ARC.Web.Api.csproj", "{F7DF3519-57C7-429C-9896-32636CB1218E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Web.Api", "R.ARC.Web.Api\R.ARC.Web.Api.csproj", "{F7DF3519-57C7-429C-9896-32636CB1218E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Common.Contract", "R.ARC.Service.Contract\R.ARC.Common.Contract.csproj", "{3F609351-0061-4B10-B9B4-959AC268E3B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Common.Contract", "R.ARC.Common.Contract\R.ARC.Common.Contract.csproj", "{3F609351-0061-4B10-B9B4-959AC268E3B5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Common.Helper", "R.ARC.Common.Helper\R.ARC.Common.Helper.csproj", "{9FA8AB2E-E667-4AD3-9BD1-5416995223C9}"
 EndProject
