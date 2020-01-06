@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -68,7 +69,7 @@ namespace R.ARC.Web.Api
             {
                 services.AddCors();
 
-                services.AddMemoryCache();
+                //services.AddMemoryCache();
 
                 services.Configure<IISServerOptions>(options =>
                 {
@@ -89,6 +90,10 @@ namespace R.ARC.Web.Api
                 services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
                 services.AddResponseCompression(options => { options.Providers.Add<GzipCompressionProvider>(); });
 
+                services.AddSpaStaticFiles(configuration =>
+                {
+                    configuration.RootPath = "ClientApp/dist";
+                });
 
                 if (_appSettings.IsValid())
                 {
@@ -227,7 +232,12 @@ namespace R.ARC.Web.Api
                 #endregion
 
                 app.UseStaticFiles();
-
+                #region Spa 
+                if (env.IsDevelopment())
+                {
+                    app.UseSpaStaticFiles();
+                }
+                #endregion
                 #region UseForwardedHeaders
                 app.UseForwardedHeaders(new ForwardedHeadersOptions
                 {
@@ -250,6 +260,21 @@ namespace R.ARC.Web.Api
                 #endregion
 
                 app.UseHttpsRedirection();
+
+                #region Spa 
+                app.UseSpa(spa =>
+                {
+                    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                    // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                    spa.Options.SourcePath = "ClientApp";
+
+                    if (env.IsDevelopment())
+                    {
+                        spa.UseAngularCliServer(npmScript: "start");
+                    }
+                });
+                #endregion
                 app.UseCors(b => b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
                 app.UseResponseCompression();
                 app.UseAuthentication();
@@ -258,6 +283,10 @@ namespace R.ARC.Web.Api
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
+                });
+
+                app.MapWhen(r => !r.Request.Path.Value.StartsWith("/swagger"), x =>{
+                    
                 });
 
 

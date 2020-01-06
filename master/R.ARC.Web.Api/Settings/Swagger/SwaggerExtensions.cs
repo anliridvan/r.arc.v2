@@ -64,14 +64,12 @@ namespace R.ARC.Web.Api.Settings.Swagger
                 foreach (var description in provider.ApiVersionDescriptions)
                 {
                     options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-                    options.RoutePrefix = string.Empty;
+                    //options.RoutePrefix = string.Empty;
                 }
             });
 
 
         }
-
-           
 
         private static string XmlCommentsFilePath
         {
