@@ -1,27 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;1591</NoWarn>
-  </PropertyGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.5.3" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.5.3" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.5.3" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.5.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\R.ARC.Core.DataAccess\R.ARC.Core.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services" />
+    <ProjectReference Include="..\R.ARC.Core.Proxy\R.ARC.Core.Proxy.csproj" />
+    <ProjectReference Include="..\R.ARC.DataLayer\R.ARC.Core.DataLayer.csproj" />
+    <ProjectReference Include="..\R.ARC.Util.Logging\R.ARC.Util.Logging.csproj" />
   </ItemGroup>
 
 </Project>

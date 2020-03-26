@@ -1,12 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using R.ARC.Core.DataAccess.Repositories;
-using R.ARC.Core.DataAccess.UnitOfWork;
-using R.ARC.Core.Entity;
+﻿using Microsoft.Extensions.DependencyInjection;
 using R.ARC.Common.Contract;
+using R.ARC.Core.DataLayer.Repositories;
+using R.ARC.Core.DataLayer.UnitOfWork;
+using R.ARC.Core.Entity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace R.ARC.Core.Business

@@ -3,7 +3,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using R.ARC.Util.Session;
 using R.ARC.Util.Mapping.Adapter;
-using R.ARC.Core.DataAccess.UnitOfWork;
+using R.ARC.Core.DataLayer.UnitOfWork;
 
 namespace R.ARC.Core.Business
 {

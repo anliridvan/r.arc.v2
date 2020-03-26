@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using R.ARC.Core.DataAccess.Repositories;
-using R.ARC.Core.DataAccess.UnitOfWork;
+using R.ARC.Core.DataLayer.Repositories;
+using R.ARC.Core.DataLayer.UnitOfWork;
 using R.ARC.Core.Entity;
 using R.ARC.Common.Contract;
 using System;

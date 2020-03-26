@@ -8,18 +8,18 @@ namespace R.ARC.Core.DataLayer.Repositories
 {
     public static class Extensions
     {
-        public static void ApplyConfigurationsFromAssembly(this ModelBuilder modelBuilder)
-        {
-            bool expression(Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>);
+        //public static void ApplyConfigurationsFromAssembly(this ModelBuilder modelBuilder)
+        //{
+        //    bool expression(Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>);
 
-            var types = Assembly.GetCallingAssembly().GetTypes().Where(type => type.GetInterfaces().Any(expression)).ToList();
+        //    var types = Assembly.GetCallingAssembly().GetTypes().Where(type => type.GetInterfaces().Any(expression)).ToList();
 
-            foreach (var type in types)
-            {
-                dynamic configuration = Activator.CreateInstance(type);
-                modelBuilder.ApplyConfiguration(configuration);
-            }
-        }
+        //    foreach (var type in types)
+        //    {
+        //        dynamic configuration = Activator.CreateInstance(type);
+        //        modelBuilder.ApplyConfiguration(configuration);
+        //    }
+        //}
 
         public static void DetectChangesLazyLoading(this DbContext context, bool enabled)
         {
