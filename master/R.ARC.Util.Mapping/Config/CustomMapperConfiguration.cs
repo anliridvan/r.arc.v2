@@ -15,7 +15,7 @@ namespace R.ARC.Util.Mapping.Config
     {
         protected override void Configure()
         {
-            MapParameter();
+            //MapParameter();
             MapAddress();
             MapTask();
         }
@@ -53,23 +53,23 @@ namespace R.ARC.Util.Mapping.Config
 
         }
 
-        private void MapParameter()
-        {
-            WhenMapping
-                .From<ListParameterModel>()
-                .To<PagedListParameters>()
-                .Map((s, d) => new Page { Index = s.PageIndex.GetValueOrDefault(-1), Size = s.PageSize.GetValueOrDefault(-1) })
-                .To(d => d.Page)
-                .And
-                .Map((s, d) => new List<Order> { new Order { IsAscending = s.SortOrder == "asc", Property = s.SortProperty } })
-                .To(d => d.Orders)
-                .And
-                .Map((s, d) => new Filter { Value = s.FilterValue, Key = s.FilterKey })
-                .To(d => d.Filter)
-                ;
+        //private void MapParameter()
+        //{
+        //    WhenMapping
+        //        .From<ListParameterModel>()
+        //        .To<PagedListParameters>()
+        //        .Map((s, d) => new Page { Index = s.PageIndex.GetValueOrDefault(-1), Size = s.PageSize.GetValueOrDefault(-1) })
+        //        .To(d => d.Page)
+        //        .And
+        //        .Map((s, d) => new List<Order> { new Order { IsAscending = s.SortOrder == "asc", Property = s.SortProperty } })
+        //        .To(d => d.Orders)
+        //        .And
+        //        .Map((s, d) => new Filter { Value = s.FilterValue, Key = s.FilterKey })
+        //        .To(d => d.Filter)
+        //        ;
 
-            GetPlansFor<ListParameterModel>().To<PagedListParameters>();
-        }
+        //    GetPlansFor<ListParameterModel>().To<PagedListParameters>();
+        //}
 
         private void MapAddress()
         {
@@ -80,10 +80,10 @@ namespace R.ARC.Util.Mapping.Config
                 .To<AddressEntity>()
                 .IgnoreTargetMembersWhere(m => m.HasAttribute<IgnoreMappingAttribute>())
                 .And
-                .Map((dto, e) => string.Join(',', dto.Level))
+                .Map((dto, e) => string.Join(",", dto.Level))
                 .To(e => e.LevelStr)
                 .And
-                .Map((dto, e) => string.Join(',', dto.LevelCode))
+                .Map((dto, e) => string.Join(",", dto.LevelCode))
                 .To(e => e.LevelCodeStr)
                 ;
 

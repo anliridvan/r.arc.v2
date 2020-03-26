@@ -6,17 +6,17 @@ namespace R.ARC.Common.Helper.Extensions
 {
     public static class QueryableExtensions
     {
-        public static IQueryable<T> Order<T>(this IQueryable<T> queryable, string property, bool isAscending)
-        {
-            if (queryable?.Any() != true || string.IsNullOrEmpty(property))
-            {
-                return queryable;
-            }
+        //public static IQueryable<T> Order<T>(this IQueryable<T> queryable, string property, bool isAscending)
+        //{
+        //    if (queryable?.Any() != true || string.IsNullOrEmpty(property))
+        //    {
+        //        return queryable;
+        //    }
 
-            var expression = CreateExpression(typeof(T), property);
+        //    var expression = CreateExpression(typeof(T), property);
 
-            return isAscending ? Queryable.OrderBy(queryable, expression) : Queryable.OrderByDescending(queryable, expression);
-        }
+        //    return isAscending ? Queryable.OrderBy(queryable, expression) : Queryable.OrderByDescending(queryable, expression);
+        //}
 
         public static IQueryable<T> Page<T>(this IQueryable<T> queryable, int index, short size)
         {

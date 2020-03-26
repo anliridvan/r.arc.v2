@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Util.Logging", "R.ARC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Util.Session", "R.ARC.Util.Session\R.ARC.Util.Session.csproj", "{7550359B-27F0-4720-88EE-9C21E4F78A07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R.ARC.Core.DataLayer", "R.ARC.DataLayer\R.ARC.Core.DataLayer.csproj", "{4C4A6C2A-8876-4281-AD08-169B7A0E8092}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{7550359B-27F0-4720-88EE-9C21E4F78A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7550359B-27F0-4720-88EE-9C21E4F78A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7550359B-27F0-4720-88EE-9C21E4F78A07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C4A6C2A-8876-4281-AD08-169B7A0E8092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C4A6C2A-8876-4281-AD08-169B7A0E8092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C4A6C2A-8876-4281-AD08-169B7A0E8092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C4A6C2A-8876-4281-AD08-169B7A0E8092}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{FFAC9438-200F-4174-AAA2-F9A597CA16F4} = {0C93D4E6-D491-4D82-9152-B5883A7A68DD}
 		{A5CB6D1F-A6B1-4343-9290-E1575CA97173} = {43D40CFE-9530-44BC-8C3C-EA8A6EF3E7EF}
 		{7550359B-27F0-4720-88EE-9C21E4F78A07} = {43D40CFE-9530-44BC-8C3C-EA8A6EF3E7EF}
+		{4C4A6C2A-8876-4281-AD08-169B7A0E8092} = {0C93D4E6-D491-4D82-9152-B5883A7A68DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E787AF4-6A5B-4A08-A42B-20D2D36A739A}

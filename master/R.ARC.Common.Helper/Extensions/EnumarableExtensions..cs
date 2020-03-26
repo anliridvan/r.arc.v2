@@ -5,7 +5,7 @@ namespace R.ARC.Common.Helper.Extensions
 {
     public static class EnumarableExtensions
     {
-        public static string ConvertString(this IEnumerable<string> strEnumarable, char separetor = ',')
+        public static string ConvertString(this IEnumerable<string> strEnumarable, string separetor = ",")
         {
             if (strEnumarable == null)
                 return null;

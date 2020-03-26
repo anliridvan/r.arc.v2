@@ -1,17 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AgileObjects.AgileMapper" Version="1.5.0" />
+    <PackageReference Include="AgileObjects.AgileMapper" Version="1.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\R.ARC.Common.Contract\R.ARC.Common.Contract.csproj" />
     <ProjectReference Include="..\R.ARC.Core.Entity\R.ARC.Core.Entity.csproj" />
-    <ProjectReference Include="..\R.ARC.Util.Logging\R.ARC.Util.Logging.csproj" />
   </ItemGroup>
 
 </Project>

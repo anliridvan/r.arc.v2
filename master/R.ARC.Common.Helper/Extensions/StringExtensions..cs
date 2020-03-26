@@ -8,7 +8,7 @@ namespace R.ARC.Common.Helper.Extensions
     {
         public static List<string> ConvertList(this string str, char separetor = ',')
         {
-            return str.Coalesce().Split(separetor, StringSplitOptions.RemoveEmptyEntries).ToList();
+            return str.Coalesce().Split(separetor).ToList();
         }
 
         public static string Coalesce(this string str, string defaultValue = "")

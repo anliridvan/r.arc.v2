@@ -33,7 +33,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\R.ARC.Common.Helper\R.ARC.Common.Helper.csproj" />
+    <ProjectReference Include="..\R.ARC.Util.Logging\R.ARC.Util.Logging.csproj" />
     <ProjectReference Include="..\R.ARC.Util.Mapping\R.ARC.Util.Mapping.csproj" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
