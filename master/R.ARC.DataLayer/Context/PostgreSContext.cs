@@ -165,17 +165,13 @@ namespace R.ARC.Core.DataLayer.Context
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("Host=marti-staging.cfbmug37eirh.eu-west-1.rds.amazonaws.com;Database=marti;Username=marti_dbuser_4459507;Password=YAbam7c2htre0ufrOc0u");
+                optionsBuilder.UseNpgsql("Host=localhost:5342;Database=r_arc;Username=postgres;Password=12345");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasPostgresExtension("fuzzystrmatch")
-                .HasPostgresExtension("pglogical")
-                .HasPostgresExtension("postgis")
-                .HasPostgresExtension("postgis_tiger_geocoder")
-                .HasPostgresExtension("postgis_topology");
+           
 
             modelBuilder.Entity<ApiResources>(entity =>
             {
@@ -766,7 +762,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('user_claims_id_seq'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('user_claims_id_seq'::regclass)");
 
                 entity.Property(e => e.Description)
                     .HasColumnName("description")
@@ -882,7 +878,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('\"CreditCards_ID_seq\"'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('\"CreditCards_ID_seq\"'::regclass)");
 
                 entity.Property(e => e.CcAssociation)
                     .HasColumnName("cc_association")
@@ -1173,7 +1169,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('\"Customers_ID_seq\"'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('\"Customers_ID_seq\"'::regclass)");
 
                 entity.Property(e => e.AccessToken)
                     .HasColumnName("access_token")
@@ -2566,7 +2562,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('out_of_use_id_seq'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('out_of_use_id_seq'::regclass)");
 
                 entity.Property(e => e.ApprovedBy).HasColumnName("approved_by");
 
@@ -2982,7 +2978,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('repair_result_body_material_id_seq'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('repair_result_body_material_id_seq'::regclass)");
 
                 entity.Property(e => e.BodyVersion).HasColumnName("body_version");
 
@@ -3043,7 +3039,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('reservation_status_id_seq'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('reservation_status_id_seq'::regclass)");
 
                 entity.Property(e => e.Order).HasColumnName("order_");
 
@@ -3188,7 +3184,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('ride_fees_id_seq'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('ride_fees_id_seq'::regclass)");
 
                 entity.Property(e => e.Amount).HasColumnName("amount");
 
@@ -3417,7 +3413,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('\"CustomerRideHistory_ID_seq\"'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('\"CustomerRideHistory_ID_seq\"'::regclass)");
 
                 entity.Property(e => e.ActualPrice)
                     .HasColumnName("actual_price")
@@ -3759,7 +3755,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('scooter_errors_backlog_aydi_seq'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('scooter_errors_backlog_aydi_seq'::regclass)");
 
                 entity.Property(e => e.Code)
                     .HasColumnName("code")
@@ -3946,7 +3942,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('scooter_repair_type_id_seq'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('scooter_repair_type_id_seq'::regclass)");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -3964,7 +3960,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('\"ScooterStatus_ID_seq\"'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('\"ScooterStatus_ID_seq\"'::regclass)");
 
                 entity.Property(e => e.GroupName)
                     .HasColumnName("group_name")
@@ -4046,7 +4042,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('table_name_id_seq'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('table_name_id_seq'::regclass)");
 
                 entity.Property(e => e.CurrentFirmwareVersion)
                     .HasColumnName("current_firmware_version")
@@ -4087,7 +4083,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('\"scooters_ID_seq\"'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('\"scooters_ID_seq\"'::regclass)");
 
                 entity.Property(e => e.Attention).HasColumnName("attention");
 
@@ -4225,7 +4221,7 @@ namespace R.ARC.Core.DataLayer.Context
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('security_rights_id_seq1'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('security_rights_id_seq1'::regclass)");
 
                 entity.Property(e => e.Description)
                     .HasColumnName("description")
@@ -4235,7 +4231,7 @@ namespace R.ARC.Core.DataLayer.Context
                     .IsRequired()
                     .HasColumnName("key")
                     .HasMaxLength(50)
-                    .HasDefaultValueSql("nextval('security_rights_id_seq'::regclass)");
+                    ; //.HasDefaultValueSql("nextval('security_rights_id_seq'::regclass)");
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")

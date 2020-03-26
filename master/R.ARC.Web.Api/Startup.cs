@@ -18,6 +18,7 @@ using Newtonsoft.Json.Serialization;
 using R.ARC.Common.Setting;
 using R.ARC.Core.Business;
 using R.ARC.Core.DataAccess;
+using R.ARC.Core.DataLayer;
 using R.ARC.Util.Logging;
 using R.ARC.Util.Logging.DbLog;
 using R.ARC.Util.Mapping.Adapter;
@@ -189,7 +190,7 @@ namespace R.ARC.Web.Api
                     var customizedAgileMapper = new CustomMapper();
                     builder.RegisterInstance<ICustomMapper>(customizedAgileMapper);
                     builder.Register(c => customizedAgileMapper).As<ICustomMapper>().SingleInstance();
-                }, new ApiModule(), new BusinessModule(), new DataAccessModule());
+                }, new ApiModule(), new BusinessModule(), new DataLayerModule());
 
 
 

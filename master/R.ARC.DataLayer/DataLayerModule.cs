@@ -6,7 +6,7 @@ using R.ARC.Core.DataLayer.Context;
 
 namespace R.ARC.Core.DataLayer
 {
-    public class DataAccessModule : Module
+    public class DataLayerModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

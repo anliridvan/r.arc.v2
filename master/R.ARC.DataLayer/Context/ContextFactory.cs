@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Reflection;
 
 namespace R.ARC.Core.DataLayer.Context
@@ -9,7 +10,8 @@ namespace R.ARC.Core.DataLayer.Context
     {
         private IConfiguration Configuration { get; }
 
-        private readonly string _connString = "Data Source=DESKTOP-ND0K7GA\\SQLEXPRESS;Initial Catalog=RARC;Integrated Security=True";
+        //private readonly string _connString = "Data Source=DESKTOP-ND0K7GA\\SQLEXPRESS;Initial Catalog=RARC;Integrated Security=True";
+        private readonly string _connString = "Host=localhost;Database=r_arc;Username=postgres;Password=12345";
 
 
         public ContextFactory(IConfiguration configuration)

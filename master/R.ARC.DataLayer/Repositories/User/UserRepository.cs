@@ -6,9 +6,7 @@ namespace R.ARC.Core.DataLayer.Repositories
 {
     public sealed class UserRepository : BaseRepository<UserEntity>, IUserRepository
     {
-        public UserRepository(PostgreSContext context, IServiceProvider serviceProvider) : base(context, serviceProvider) {
-            context.
-        }
+        public UserRepository(PostgreSContext context, IServiceProvider serviceProvider) : base(context, serviceProvider) { }
 
     }
 }

@@ -19,12 +19,12 @@ namespace R.ARC.Web.Api.Controllers
             _accountApp = serviceProvider.GetService<IUserTaskApplication>();
         }
 
-        [Route("[action]/{id}")]
-        [HttpGet]
-        public async Task<IActionResult> Taskler(int id, [FromQuery]TaskModelType tip, [FromQuery]TaskFilterType filter, [FromQuery]ListParameterModel listParams)
-        {
-            return Ok(await _accountApp.GetTasksAsync(id, tip, filter, listParams.Map().ToANew<PagedListParameters>()));
-        }
+        //[Route("[action]/{id}")]
+        //[HttpGet]
+        //public async Task<IActionResult> Taskler(int id, [FromQuery]TaskModelType tip, [FromQuery]TaskFilterType filter, [FromQuery]ListParameterModel listParams)
+        //{
+        //    return Ok(await _accountApp.GetTasksAsync(id, tip, filter, listParams.Map().ToANew<PagedListParameters>()));
+        //}
 
         [Route("{taskId}")]
         [HttpGet]
