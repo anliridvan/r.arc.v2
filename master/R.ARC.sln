@@ -29,11 +29,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Util.Logging", "R.ARC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Util.Session", "R.ARC.Util.Session\R.ARC.Util.Session.csproj", "{7550359B-27F0-4720-88EE-9C21E4F78A07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R.ARC.Core.DataLayer", "R.ARC.DataLayer\R.ARC.Core.DataLayer.csproj", "{4C4A6C2A-8876-4281-AD08-169B7A0E8092}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Core.DataLayer", "R.ARC.DataLayer\R.ARC.Core.DataLayer.csproj", "{4C4A6C2A-8876-4281-AD08-169B7A0E8092}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R.ARC.Core.Proxy", "R.ARC.Core.Proxy\R.ARC.Core.Proxy.csproj", "{45E3DF1C-1EE4-4AD4-BA88-349BDF736AA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Core.Proxy", "R.ARC.Core.Proxy\R.ARC.Core.Proxy.csproj", "{45E3DF1C-1EE4-4AD4-BA88-349BDF736AA6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X", "X", "{3DF1A49A-B1DD-495F-B753-679061D85A49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AWS", "AWS", "{B4746BE6-FD32-466C-B967-B72ABB061EC5}"
+	ProjectSection(SolutionItems) = preProject
+		R.ARC.Lambda\.gitignore = R.ARC.Lambda\.gitignore
+		R.ARC.Lambda\events\event.json = R.ARC.Lambda\events\event.json
+		R.ARC.Lambda\omnisharp.json = R.ARC.Lambda\omnisharp.json
+		R.ARC.Lambda\README.md = R.ARC.Lambda\README.md
+		R.ARC.Lambda\template.yaml = R.ARC.Lambda\template.yaml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Lambda", "R.ARC.Lambda\src\HelloWorld\R.ARC.Lambda.csproj", "{287A04D8-EAAE-46E5-B545-9394D7BE4F54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "R.ARC.Lambda.Test", "R.ARC.Lambda\test\HelloWorld.Test\R.ARC.Lambda.Test.csproj", "{83FA381C-B621-46FE-BBF7-EAD21B5D506D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +98,14 @@ Global
 		{45E3DF1C-1EE4-4AD4-BA88-349BDF736AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45E3DF1C-1EE4-4AD4-BA88-349BDF736AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45E3DF1C-1EE4-4AD4-BA88-349BDF736AA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{287A04D8-EAAE-46E5-B545-9394D7BE4F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{287A04D8-EAAE-46E5-B545-9394D7BE4F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{287A04D8-EAAE-46E5-B545-9394D7BE4F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{287A04D8-EAAE-46E5-B545-9394D7BE4F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83FA381C-B621-46FE-BBF7-EAD21B5D506D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83FA381C-B621-46FE-BBF7-EAD21B5D506D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83FA381C-B621-46FE-BBF7-EAD21B5D506D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83FA381C-B621-46FE-BBF7-EAD21B5D506D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +122,8 @@ Global
 		{7550359B-27F0-4720-88EE-9C21E4F78A07} = {43D40CFE-9530-44BC-8C3C-EA8A6EF3E7EF}
 		{4C4A6C2A-8876-4281-AD08-169B7A0E8092} = {0C93D4E6-D491-4D82-9152-B5883A7A68DD}
 		{45E3DF1C-1EE4-4AD4-BA88-349BDF736AA6} = {0C93D4E6-D491-4D82-9152-B5883A7A68DD}
+		{287A04D8-EAAE-46E5-B545-9394D7BE4F54} = {B4746BE6-FD32-466C-B967-B72ABB061EC5}
+		{83FA381C-B621-46FE-BBF7-EAD21B5D506D} = {B4746BE6-FD32-466C-B967-B72ABB061EC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E787AF4-6A5B-4A08-A42B-20D2D36A739A}
