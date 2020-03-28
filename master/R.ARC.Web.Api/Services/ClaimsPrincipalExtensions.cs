@@ -21,7 +21,7 @@ namespace R.ARC.Web.Api.Services
                 UserName = identityName
             };
 
-            if (int.TryParse(idValue, out var id)) userInformation.Id = id;
+            if (Guid.TryParse(idValue, out var id)) userInformation.Id = id;
 
             return userInformation;
         }

@@ -2,14 +2,15 @@
 using R.ARC.Common.Contract;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 
 namespace R.ARC.Core.Business
 {
     public interface IAddressDomain
     {
-        Task<AddressBasicModel> GetAddressesAsync(int accountId);
-        Task<int> SaveAddressAsync(AddressModel model);
-        Task<int> DeleteAddressAsync( int addressId);
+        Task<AddressBasicModel> GetAddressesAsync(Guid accountId);
+        Task<Guid> SaveAddressAsync(AddressModel model);
+        Task<Guid> DeleteAddressAsync(Guid addressId);
 
         IEnumerable<AddressMappingModel> GetAddressMapping();
     }

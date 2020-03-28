@@ -28,7 +28,7 @@ namespace R.ARC.Web.Api.Controllers
 
         [Route("{taskId}")]
         [HttpGet]
-        public async Task<IActionResult> Get(int taskId)
+        public async Task<IActionResult> Get(Guid taskId)
         {
             return Ok(await _accountApp.GetTaskAsync(taskId));
         }
@@ -55,7 +55,7 @@ namespace R.ARC.Web.Api.Controllers
 
         [Route("{taskId}")]
         [HttpDelete]
-        public async Task<IActionResult> Delete(int taskId)
+        public async Task<IActionResult> Delete(Guid taskId)
         {
             return Ok(await _accountApp.DeleteTaskAsync(taskId));
         }

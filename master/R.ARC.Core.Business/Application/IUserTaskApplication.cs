@@ -9,16 +9,16 @@ namespace R.ARC.Core.Business.Application
 {
     public interface IUserTaskApplication
     {
-        Task<IEnumerable<AddressBasicModel>> GetAddressesAsync(int userId);
-        Task<int> SaveAddressAsync(AddressModel model);
-        Task<int> DeleteAddressAsync(int addressId);
+        Task<IEnumerable<AddressBasicModel>> GetAddressesAsync(Guid userId);
+        Task<Guid> SaveAddressAsync(AddressModel model);
+        Task<Guid> DeleteAddressAsync(Guid addressId);
 
-        Task<PagedList<TaskBasicModel>> GetTasksAsync(int id, TaskModelType tip, TaskFilterType filter, PagedListParameters pagedListParameters);
-        Task<int> SaveTaskAsync(TaskModel model);
-        Task<int> DeleteTaskAsync(int taskId);
-        Task<int> SaveTaskStatusAsync(TaskStatusModel model);
-        Task<int> SaveTaskPriortyAsync(TaskPriorityModel model);
+        Task<PagedList<TaskBasicModel>> GetTasksAsync(Guid id, TaskModelType tip, TaskFilterType filter, PagedListParameters pagedListParameters);
+        Task<Guid> SaveTaskAsync(TaskModel model);
+        Task<Guid> DeleteTaskAsync(Guid taskId);
+        Task<Guid> SaveTaskStatusAsync(TaskStatusModel model);
+        Task<Guid> SaveTaskPriortyAsync(TaskPriorityModel model);
 
-        Task<TaskModel> GetTaskAsync(int taskId);
+        Task<TaskModel> GetTaskAsync(Guid taskId);
     }
 }

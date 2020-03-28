@@ -22,48 +22,48 @@ namespace R.ARC.Core.Business.Application
 
 
 
-        public Task<PagedList<TaskBasicModel>> GetTasksAsync(int id, TaskModelType tip, TaskFilterType filter, PagedListParameters pagedListParameters)
+        public Task<PagedList<TaskBasicModel>> GetTasksAsync(Guid id, TaskModelType tip, TaskFilterType filter, PagedListParameters pagedListParameters)
         {
             return _taskDom.GetTasksAsync(id, tip, filter, pagedListParameters);
         }
 
-        public Task<TaskModel> GetTaskAsync(int taskId)
+        public Task<TaskModel> GetTaskAsync(Guid taskId)
         {
             return _taskDom.GetTaskAsync(taskId);
         }
 
-        public Task<int> SaveTaskAsync(TaskModel model)
+        public Task<Guid> SaveTaskAsync(TaskModel model)
         {
             return _taskDom.SaveTaskAsync(model);
         }
 
-        public Task<int> SaveTaskStatusAsync(TaskStatusModel model)
+        public Task<Guid> SaveTaskStatusAsync(TaskStatusModel model)
         {
             return _taskDom.SaveTaskStatusAsync(model);
         }
 
-        public Task<int> SaveTaskPriortyAsync(TaskPriorityModel model)
+        public Task<Guid> SaveTaskPriortyAsync(TaskPriorityModel model)
         {
             return _taskDom.SaveTaskPriortyAsync(model);
         }
 
-        public Task<int> DeleteTaskAsync(int taskId)
+        public Task<Guid> DeleteTaskAsync(Guid taskId)
         {
             return _taskDom.DeleteTaskAsync(taskId);
         }
 
 
-        public Task<IEnumerable<AddressBasicModel>> GetAddressesAsync(int userId)
+        public Task<IEnumerable<AddressBasicModel>> GetAddressesAsync(Guid userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> SaveAddressAsync(AddressModel model)
+        public Task<Guid> SaveAddressAsync(AddressModel model)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> DeleteAddressAsync(int addressId)
+        public Task<Guid> DeleteAddressAsync(Guid addressId)
         {
             throw new NotImplementedException();
         }
