@@ -1,7 +1,7 @@
 # r.arc.v2
 Layered Architecture
 
-<img src="https://lh5.googleusercontent.com/O2tZjP5pPBRAI4Tu3r4Kyb3ybdAgiArGoaXiZMXiI8xfD_ZYuyV0kqRehYf7Mpl5W6Mx0dM4Cgp8ZzeQCIRF=w1366-h665-rw" class="ndfHFb-c4YZDc-HiaYvf-RJLb9c" alt="references_V2.JPG görüntüleniyor" aria-hidden="true">
+<img src="https://lh6.googleusercontent.com/T_NeIKaezbczOFnVLYglDHV8x8wuoerxfxqtndxYbxE94Y9KQT3_7RhNzSQIzr5CMNeGkBN2a4v-XKECsWHQ=w1366-h665-rw" class="ndfHFb-c4YZDc-HiaYvf-RJLb9c" alt="references_V2.PNG görüntüleniyor" aria-hidden="true">
 
 .net Core 3.1
 
