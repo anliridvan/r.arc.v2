@@ -16,10 +16,6 @@ namespace R.ARC.Core.DataAccess.Configurations
             builder.Property(x => x.PasswordHash).IsRequired();
             builder.Property(x => x.PasswordSalt).IsRequired();
 
-            builder.Property(b => b.ExtendedData)
-                  .HasConversion(
-                              v => JsonConvert.SerializeObject(v),
-                              v => JsonConvert.DeserializeObject<UserExt>(v));
         }
     }
 }

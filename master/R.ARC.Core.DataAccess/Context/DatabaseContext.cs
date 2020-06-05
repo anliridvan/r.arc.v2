@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using R.ARC.Core.DataAccess.Repositories;
 using R.ARC.Core.Entity;
-using R.ARC.Common.Contract;
-using System.Reflection;
-using System.Linq;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace R.ARC.Core.DataAccess.Context
 {
@@ -27,6 +27,18 @@ namespace R.ARC.Core.DataAccess.Context
             {
                 if (typeof(SoftDeleteEntity).IsAssignableFrom(type.ClrType))
                     modelBuilder.SetSoftDeleteFilter(type.ClrType);
+                if (type.ClrType.BaseType.IsGenericType && typeof(BaseExtendedEntity<>).IsAssignableFrom(type.ClrType.BaseType.GetGenericTypeDefinition()))
+                {
+                    foreach (PropertyInfo propertyInfo in type.ClrType.GetProperties())
+                    {
+                        if (propertyInfo.Name == "ExtendedData")
+                        {
+                            modelBuilder.SetExtendedFilter(type.ClrType, propertyInfo.PropertyType);
+                            break;
+                        }
+                    }
+
+                }
             }
 
             new DatabaseContextSeed().Seed(modelBuilder);
@@ -60,6 +72,25 @@ namespace R.ARC.Core.DataAccess.Context
             where TEntity : SoftDeleteEntity
         {
             modelBuilder.Entity<TEntity>().HasQueryFilter(x => !x.IsDeleted);
+        }
+
+        public static void SetExtendedFilter(this ModelBuilder modelBuilder, Type entityType, Type extEntityType)
+        {
+            SetExtendedFilterMethod.MakeGenericMethod(extEntityType, entityType)
+                .Invoke(null, new object[] { modelBuilder });
+        }
+
+        static readonly MethodInfo SetExtendedFilterMethod = typeof(EFFilterExtensions)
+                   .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                   .Single(t => t.IsGenericMethod && t.Name == "SetExtendedFilter");
+
+        public static void SetExtendedFilter<TExtEntity, TEntity>(this ModelBuilder modelBuilder)
+            where TExtEntity : class, new() where TEntity : BaseExtendedEntity<TExtEntity>
+        {
+            modelBuilder.Entity<TEntity>().Property(b => b.ExtendedData)
+                  .HasConversion(
+                              v => JsonConvert.SerializeObject(v),
+                              v => JsonConvert.DeserializeObject<TExtEntity>(v));
         }
     }
 }

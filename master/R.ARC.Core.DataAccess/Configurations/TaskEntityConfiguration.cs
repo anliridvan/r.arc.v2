@@ -18,11 +18,6 @@ namespace R.ARC.Core.DataAccess.Configurations
             builder.Property(x => x.TaskType).IsRequired();
             builder.Property(x => x.TaskStatus).IsRequired();
             builder.Property(x => x.TaskPriority).IsRequired();
-
-            builder.Property(b => b.ExtendedData)
-                  .HasConversion(
-                              v => JsonConvert.SerializeObject(v),
-                              v => JsonConvert.DeserializeObject<TaskExt>(v));
         }
     }
 }
