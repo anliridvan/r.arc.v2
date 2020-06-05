@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using R.ARC.Core.Entity.Models;
+using R.ARC.Core.Entity;
 
 namespace R.ARC.Core.DataLayer.Context
 {
@@ -12,7 +13,10 @@ namespace R.ARC.Core.DataLayer.Context
         public PostgreSContext(DbContextOptions<PostgreSContext> options)
             : base(options)
         {
+
         }
+
+        #region DbSets
 
         public virtual DbSet<ApiResources> ApiResources { get; set; }
         public virtual DbSet<AwsdmsDdlAudit> AwsdmsDdlAudit { get; set; }
@@ -160,18 +164,43 @@ namespace R.ARC.Core.DataLayer.Context
         public virtual DbSet<WorkOrders> WorkOrders { get; set; }
         public virtual DbSet<Zones> Zones { get; set; }
 
+        #endregion
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("Host=localhost:5342;Database=r_arc;Username=postgres;Password=12345");
+                 optionsBuilder.UseNpgsql("Host=localhost:5342;Database=r_arc;Username=postgres;Password=12345");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+
+            modelBuilder.ApplyConfigurationsFromAssembly();
+
+            //modelBuilder.Entity<SoftDeleteEntity>().HasQueryFilter(u => !u.IsDeleted);
+            foreach (var type in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(SoftDeleteEntity).IsAssignableFrom(type.ClrType))
+                    modelBuilder.SetSoftDeleteFilter(type.ClrType);
+                if (typeof(BaseEntity).IsAssignableFrom(type.ClrType))
+                    modelBuilder.BaseEntityBind(type.ClrType);
+                if (typeof(BaseExtendedEntity<>).IsAssignableFrom(type.ClrType))
+                    modelBuilder.BaseExtendedEntityBind(type.ClrType);
+            }
+
+
+            #region Entity Relations Configurations
+
+            // modelBuilder.Entity<TaskEntity>()
+            //     .HasOne(t => t.User)
+            //     .WithOne()
+            //     .HasForeignKey(typeof(TaskEntity), nameof(TaskEntity.UserId))
+            //     .IsRequired(false)
+            //     .OnDelete(DeleteBehavior.Restrict);
+
+            #endregion
 
             modelBuilder.Entity<ApiResources>(entity =>
             {

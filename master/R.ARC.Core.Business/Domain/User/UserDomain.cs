@@ -48,7 +48,7 @@ namespace R.ARC.Core.Business
             return await _UserRep.ListAsync<UserModel>();
         }
 
-        public async Task<UserModel> GetByIdAsync(int id)
+        public async Task<UserModel> GetByIdAsync(Guid id)
         {
             return await _UserRep.FirstOrDefaultAsync<UserModel>(x => x.Id == id); 
         }
@@ -76,7 +76,7 @@ namespace R.ARC.Core.Business
             return user;
         }
 
-        public async Task<int> UpdateAsync(UserModel userParam, string password = null)
+        public async Task<Guid> UpdateAsync(UserModel userParam, string password = null)
         {
             var user = await  _UserRep.FirstOrDefaultAsync(x=> x.Id == userParam.Id);
 
@@ -116,7 +116,7 @@ namespace R.ARC.Core.Business
             return user.Id;
         }
 
-        public async Task<int> DeleteAsync(int id)
+        public async Task<Guid> DeleteAsync(Guid id)
         {
             var user = await _UserRep.FirstOrDefaultAsync(m => m.Id == id);
             if (user != null)
@@ -125,7 +125,7 @@ namespace R.ARC.Core.Business
                 await _uow.SaveChangesAsync();
                 return id;
             }
-            return 0;
+            return Guid.Empty;
         }
 
         // private helper methods

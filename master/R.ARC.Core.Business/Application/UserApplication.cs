@@ -25,7 +25,7 @@ namespace R.ARC.Core.Business.Application
             return _userDom.GetAllAsync();
         }
 
-        public Task<UserModel> GetByIdAsync(int id)
+        public Task<UserModel> GetByIdAsync(Guid id)
         {
             return _userDom.GetByIdAsync(id);
         }
@@ -40,7 +40,7 @@ namespace R.ARC.Core.Business.Application
             return _userDom.UpdateAsync(user, password);
         }
 
-        public Task DeleteAsync(int id)
+        public Task DeleteAsync(Guid id)
         {
             return _userDom.DeleteAsync(id);
         }

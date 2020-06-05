@@ -22,12 +22,12 @@ namespace R.ARC.Core.Business
             _uow = serviceProvider.GetService<IDatabaseUnitOfWork>();
         }
 
-        public async Task<AddressBasicModel> GetAddressesAsync(int addressId)
+        public async Task<AddressBasicModel> GetAddressesAsync(Guid addressId)
         {
             return await _addressRep.FirstOrDefaultAsync<AddressBasicModel>(m => m.Id == addressId);
         }
 
-        public async Task<int> SaveAddressAsync(AddressModel model)
+        public async Task<Guid> SaveAddressAsync(AddressModel model)
         {
             AddressEntity addressEntity = await _addressRep.FirstOrDefaultAsync(m => m.Id == model.Id);
 
@@ -64,7 +64,7 @@ namespace R.ARC.Core.Business
             return _addressMappingRep.List<AddressMappingModel>();
         }
 
-        public async Task<int> DeleteAddressAsync(int addressId)
+        public async Task<Guid> DeleteAddressAsync(Guid addressId)
         {
             AddressEntity addressEntity = await _addressRep.FirstOrDefaultAsync(m => m.Id == addressId);
 
@@ -75,7 +75,7 @@ namespace R.ARC.Core.Business
                 return addressId;
             }
 
-            return 0;
+            return Guid.Empty;
         }
 
     }

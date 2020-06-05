@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using R.ARC.Common.Helper.Enums;
-using  R.ARC.Common.Helper.Models.Exceptions;
+using R.ARC.Common.Helper.Models.Exceptions;
 using R.ARC.Common.Helper.Paging;
 using R.ARC.Core.DataLayer.Repositories;
 using R.ARC.Core.DataLayer.UnitOfWork;
@@ -26,7 +26,7 @@ namespace R.ARC.Core.Business
             _taskRep = serviceProvider.GetService<ITaskRepository>();
         }
 
-        public async Task<PagedList<TaskBasicModel>> GetTasksAsync(int id, TaskModelType tip,
+        public async Task<PagedList<TaskBasicModel>> GetTasksAsync(Guid id, TaskModelType tip,
                                                                 TaskFilterType filter, PagedListParameters pagedListParameters)
         {
             IQueryable<TaskEntity> querable = _taskRep.Queryable;
@@ -36,7 +36,7 @@ namespace R.ARC.Core.Business
                 querable = querable.Where(m => m.TaskModelType == tip);
             }
 
-            if (id > 0 && tip != TaskModelType.Default)
+            if (id != null && id != Guid.Empty && tip != TaskModelType.Default)
             {
                 switch (tip)
                 {
@@ -87,12 +87,12 @@ namespace R.ARC.Core.Business
         }
 
 
-        public async Task<TaskModel> GetTaskAsync(int taskId)
+        public async Task<TaskModel> GetTaskAsync(Guid taskId)
         {
             return await _taskRep.FirstOrDefaultAsync<TaskModel>(m => m.Id == taskId);
         }
 
-        public async Task<int> SaveTaskAsync(TaskModel model)
+        public async Task<Guid> SaveTaskAsync(TaskModel model)
         {
             TaskEntity taskEntity = await _taskRep.FirstOrDefaultWithDeletedAsync(m => m.Id == model.Id);
 
@@ -125,7 +125,7 @@ namespace R.ARC.Core.Business
             return taskEntity.Id;
         }
 
-        public async Task<int> SaveTaskStatusAsync(TaskStatusModel model)
+        public async Task<Guid> SaveTaskStatusAsync(TaskStatusModel model)
         {
             TaskEntity taskEntity = await _taskRep.FirstOrDefaultWithDeletedAsync(m => m.Id == model.Id);
 
@@ -153,7 +153,7 @@ namespace R.ARC.Core.Business
             return taskEntity.Id;
         }
 
-        public async Task<int> SaveTaskPriortyAsync(TaskPriorityModel model)
+        public async Task<Guid> SaveTaskPriortyAsync(TaskPriorityModel model)
         {
             TaskEntity taskEntity = await _taskRep.FirstOrDefaultWithDeletedAsync(m => m.Id == model.Id);
 
@@ -181,7 +181,7 @@ namespace R.ARC.Core.Business
             return taskEntity.Id;
         }
 
-        public async Task<int> DeleteTaskAsync(int taskId)
+        public async Task<Guid> DeleteTaskAsync(Guid taskId)
         {
             TaskEntity taskEntity = await _taskRep.FirstOrDefaultAsync(m => m.Id == taskId);
 
@@ -192,7 +192,7 @@ namespace R.ARC.Core.Business
                 return taskEntity.Id;
             }
 
-            return 0;
+            return Guid.Empty;
         }
     }
 }
