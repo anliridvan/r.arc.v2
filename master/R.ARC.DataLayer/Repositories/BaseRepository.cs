@@ -127,7 +127,7 @@ namespace R.ARC.Core.DataLayer.Repositories
             {
                 foreach (var item in items)
                 {
-                    typeof(T).GetProperty(IsDeletedProp).SetValue(item, false);
+                    typeof(T).GetProperty(IsDeletedProp).SetValue(item, true);
                     Update(item);
                 }
             }

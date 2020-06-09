@@ -41,7 +41,7 @@ namespace R.ARC.Web.Api
 
         public IConfiguration Configuration { get; }
 
-        private AppSettings _appSettings;
+        private readonly AppSettings _appSettings;
 
         private readonly ILogger _logger;
 
