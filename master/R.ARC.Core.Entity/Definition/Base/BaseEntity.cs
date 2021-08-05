@@ -11,18 +11,18 @@ namespace R.ARC.Core.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [IgnoreMapping]
+        
         [Required]
-        public string CreatedBy { get; set; }
+        public Guid CreatedBy { get; set; }
 
-        [IgnoreMapping]
+
         [Required]
-        public DateTime CreationTime { get; set; }
+        public DateTime CreationTime { get; set; } = DateTime.UtcNow;
 
-        [IgnoreMapping]
-        public string UpdatedBy { get; set; }
 
-        [IgnoreMapping]
+        public Guid UpdatedBy { get; set; }
+
+       
         public DateTime? UpdateTime { get; set; }
 
     }

@@ -1,9 +1,12 @@
 
 
-C:\WINDOWS\system32>docker run -d -p 5432:5432 --name local-postgres -e POSTGRES_PASSWORD=12345 postgres
-91487859c04084e83a70417e1a1e138dd515eeb257b2d46947768a55a37b3938
+docker pull postgres
 
-C:\WINDOWS\system32>docker exec -it local-postgres bash
+
+docker run -d -p 5432:5432 --name postgres -e POSTGRES_PASSWORD=postgres postgres
+->a77e232ae0b1be9a9cf77954c0fef7d1e2a369c9c18c74ba49aa212b3c49eeae
+
+docker exec -it postgres bash
 root@91487859c040:/# psql -U postgres
 psql (12.2 (Debian 12.2-2.pgdg100+1))
 Type "help" for help.

@@ -42,7 +42,7 @@ namespace R.ARC.Util.Logging.Contracts
             , Exception exception = null)
         {
             AppName = appName;
-            LogTime = DateTime.Now;
+            LogTime = DateTime.UtcNow;
             EventId = eventId;
             EventName = eventName;
             LogLevel = logLevel;

@@ -24,7 +24,7 @@ namespace R.ARC.Core.DataLayer.Repositories
             Context.DetectChangesLazyLoading(false);
         }
 
-        protected string Username => SessionManager.UserName;
+        protected Guid UserId => SessionManager.UserId;
 
         private readonly string IsDeletedProp = nameof(SoftDeleteEntity.IsDeleted);
 
@@ -61,8 +61,8 @@ namespace R.ARC.Core.DataLayer.Repositories
         {
             if (item is BaseEntity)
             {
-                typeof(T).GetProperty(nameof(BaseEntity.CreatedBy)).SetValue(item, Username);
-                typeof(T).GetProperty(nameof(BaseEntity.CreationTime)).SetValue(item, DateTime.Now);
+                typeof(T).GetProperty(nameof(BaseEntity.CreatedBy)).SetValue(item, UserId);
+                typeof(T).GetProperty(nameof(BaseEntity.CreationTime)).SetValue(item, DateTime.UtcNow);
             }
 
             Set.Add(item);
@@ -72,8 +72,8 @@ namespace R.ARC.Core.DataLayer.Repositories
         {
             if (item is BaseEntity)
             {
-                typeof(T).GetProperty(nameof(BaseEntity.CreatedBy)).SetValue(item, Username);
-                typeof(T).GetProperty(nameof(BaseEntity.CreationTime)).SetValue(item, DateTime.Now);
+                typeof(T).GetProperty(nameof(BaseEntity.CreatedBy)).SetValue(item, UserId);
+                typeof(T).GetProperty(nameof(BaseEntity.CreationTime)).SetValue(item, DateTime.UtcNow);
             }
 
             // return Set.AddAsync(item); .net core 2.2
@@ -96,8 +96,8 @@ namespace R.ARC.Core.DataLayer.Repositories
 
             if (item is BaseEntity)
             {
-                typeof(T).GetProperty(nameof(BaseEntity.UpdatedBy)).SetValue(item, Username);
-                typeof(T).GetProperty(nameof(BaseEntity.UpdateTime)).SetValue(item, DateTime.Now);
+                typeof(T).GetProperty(nameof(BaseEntity.UpdatedBy)).SetValue(item, UserId);
+                typeof(T).GetProperty(nameof(BaseEntity.UpdateTime)).SetValue(item, DateTime.UtcNow);
             }
 
             Set.Attach(item);

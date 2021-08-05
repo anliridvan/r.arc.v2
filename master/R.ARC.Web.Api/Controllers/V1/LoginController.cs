@@ -105,6 +105,7 @@ namespace R.ARC.Web.Api.Controllers.V1
         {
             var claims = new List<Claim>
             {
+                new Claim(ClaimTypes.Sid, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, await _jwtOptions.JtiGenerator()),
                 new Claim(JwtRegisteredClaimNames.Iat,

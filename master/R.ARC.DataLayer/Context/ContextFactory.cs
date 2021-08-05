@@ -11,7 +11,7 @@ namespace R.ARC.Core.DataLayer.Context
         private IConfiguration Configuration { get; }
 
         //private readonly string _connString = "Data Source=DESKTOP-ND0K7GA\\SQLEXPRESS;Initial Catalog=RARC;Integrated Security=True";
-        private readonly string _connString = "Host=localhost;Database=r_arc;Username=postgres;Password=12345";
+        private readonly string _connString = "Host=localhost;Database=postgres;Username=postgres;Password=postgres";
 
 
         public ContextFactory(IConfiguration configuration)

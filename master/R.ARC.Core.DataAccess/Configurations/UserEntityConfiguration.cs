@@ -9,7 +9,7 @@ namespace R.ARC.Core.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<UserEntity> builder)
         {
-            builder.ToTable("tUser", "dbo");
+            builder.ToTable("tUser", "public");
 
             builder.Property(x => x.Username).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Email).IsRequired();

@@ -9,7 +9,7 @@ namespace R.ARC.Core.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<TaskEntity> builder)
         {
-            builder.ToTable("tTask", "dbo");
+            builder.ToTable("tTask", "public");
 
             builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Description).HasMaxLength(255);

@@ -8,7 +8,7 @@ namespace R.ARC.Core.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<AddressEntity> builder)
         {
-            builder.ToTable("tAddress", "dbo");
+            builder.ToTable("tAddress", "public");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();

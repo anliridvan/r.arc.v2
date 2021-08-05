@@ -11,6 +11,10 @@ namespace R.ARC.Core.Entity
     public class TaskEntity : BaseExtendedEntity<TaskExt>
     {
 
+        public long TaskNo { get; set; }
+
+        public Guid UserId { get; set; }
+
         public string Title { get; set; }
 
         public string Description { get; set; }
@@ -28,6 +32,11 @@ namespace R.ARC.Core.Entity
         public TaskStatus TaskStatus { get; set; }
 
         public TaskModelType TaskModelType { get; set; }
+
+        // Love U Postgres :*
+        public long[] RelatedTasks { get; set; } = null;
+
+        public UserEntity MasterUser { get; set; }
 
     }
 }

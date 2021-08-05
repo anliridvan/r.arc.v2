@@ -8,7 +8,7 @@ namespace R.ARC.Core.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<AddressMappingEntity> builder)
         {
-            builder.ToTable("tAddressMapping", "dbo");
+            builder.ToTable("AddressMappings", "public");
 
             builder.HasKey(x => x.CountryCode);
             builder.Property(x => x.Depth).IsRequired();

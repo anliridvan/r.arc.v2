@@ -52,6 +52,16 @@ namespace R.ARC.Core.DataAccess.Context
                 Depth = 1
             });
 
+            modelBuilder.Entity<UserEntity>().HasData(new UserEntity
+            {
+                FirstName = "Ridvan",
+                LastName = "Anli",
+                Username = "admin",
+                CreatedBy = System.Guid.Empty,
+                CreationTime = System.DateTime.UtcNow
+            });
+
+
         }
     }
 }

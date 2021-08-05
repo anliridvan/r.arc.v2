@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace R.ARC.Core.Entity
 {
     public class UserEntity : BaseExtendedEntity<UserExt>
@@ -14,5 +16,6 @@ namespace R.ARC.Core.Entity
         public byte[] PasswordHash { get; set; }
 
         public byte[] PasswordSalt { get; set; }
+
     }
 }

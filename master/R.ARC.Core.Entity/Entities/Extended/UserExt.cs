@@ -6,6 +6,6 @@ namespace R.ARC.Core.Entity
 {
     public class UserExt
     {
-
+        public List<AddressEntity> AddressList { get; set; }
     }
 }

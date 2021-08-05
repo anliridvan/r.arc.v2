@@ -6,8 +6,9 @@
      <ProjectReference Include="..\R.ARC.Common.Helper\R.ARC.Common.Helper.csproj" />
    </ItemGroup>
    <ItemGroup>
-     <Folder Include="Action\" />
-     <Folder Include="Tool\" />
-     <Folder Include="User\" />
+	 <Folder Include="3_Angel\" />
+     <Folder Include="3_Angel\Action\" />
+     <Folder Include="3_Angel\Tool\" />
+     <Folder Include="3_Angel\User\" />
    </ItemGroup>
 </Project>

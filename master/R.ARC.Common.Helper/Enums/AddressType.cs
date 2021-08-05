@@ -2,9 +2,10 @@
 {
     public enum AddressType
     {
-        Posta = 1,
-        Fatura = 2,
-        Kargo = 3,
-        Diger = 4
+        Mail = 1,
+        Invoice = 2,
+        Delivery = 3,
+        Office = 3,
+        Other = 99
     }
 }
