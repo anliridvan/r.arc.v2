@@ -1,20 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
-using R.ARC.Common.Helper.Enums;
-using R.ARC.Common.Contract;
+using R.ARC.Common.Helper.Models;
+using R.ARC.Common.Helper.Models.Exceptions;
 using R.ARC.Util.Logging;
+using R.ARC.Web.Api.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
-using Microsoft.AspNetCore.Authorization;
-using R.ARC.Web.Api.Services;
-using System.Net;
-using R.ARC.Common.Helper.Models;
-using Microsoft.AspNetCore.Mvc.Filters;
-using R.ARC.Common.Helper.Models.Exceptions;
-using Microsoft.AspNetCore.Http;
 
 namespace R.ARC.Web.Api.Controllers
 {
@@ -29,7 +25,7 @@ namespace R.ARC.Web.Api.Controllers
         protected IMemoryCache MemoryCache;
 
         protected IAppLogger<T> Logger;
-        
+
         protected IServiceInvoker ServiceInvoker { get; }
 
         public BaseController(IServiceProvider serviceProvider)
