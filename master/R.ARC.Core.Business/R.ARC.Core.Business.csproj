@@ -5,9 +5,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\R.ARC.Core.Proxy\R.ARC.Core.Proxy.csproj" />
     <ProjectReference Include="..\R.ARC.DataLayer\R.ARC.Core.DataLayer.csproj" />
-    <ProjectReference Include="..\R.ARC.Util.Logging\R.ARC.Util.Logging.csproj" />
   </ItemGroup>
 
 </Project>

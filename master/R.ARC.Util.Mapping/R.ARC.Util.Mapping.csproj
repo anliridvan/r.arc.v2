@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\R.ARC.Common.Contract\R.ARC.Common.Contract.csproj" />
-    <ProjectReference Include="..\R.ARC.Core.Entity\R.ARC.Core.Entity.csproj" />
   </ItemGroup>
 
 </Project>

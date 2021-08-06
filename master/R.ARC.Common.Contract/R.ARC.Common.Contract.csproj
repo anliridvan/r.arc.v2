@@ -3,6 +3,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\R.ARC.Common.Helper\R.ARC.Common.Helper.csproj" />
+    <ProjectReference Include="..\R.ARC.Core.Entity\R.ARC.Core.Entity.csproj" />
   </ItemGroup>
 </Project>

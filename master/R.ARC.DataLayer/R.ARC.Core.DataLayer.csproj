@@ -20,8 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\R.ARC.Util.Mapping\R.ARC.Util.Mapping.csproj" />
-    <ProjectReference Include="..\R.ARC.Util.Session\R.ARC.Util.Session.csproj" />
+    <ProjectReference Include="..\R.ARC.Core.Proxy\R.ARC.Core.Proxy.csproj" />
   </ItemGroup>
 
 </Project>
