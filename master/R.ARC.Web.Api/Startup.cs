@@ -71,7 +71,6 @@ namespace R.ARC.Web.Api
                 services.AddCors();
 
                 //services.AddMemoryCache();
-
                 services.Configure<IISServerOptions>(options =>
                 {
                     options.AllowSynchronousIO = true;

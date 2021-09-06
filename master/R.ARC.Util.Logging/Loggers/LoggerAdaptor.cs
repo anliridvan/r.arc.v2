@@ -3,6 +3,8 @@ using R.ARC.Util.Session;
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using R.ARC.Common.Setting;
 
 namespace R.ARC.Util.Logging
 {
@@ -17,7 +19,8 @@ namespace R.ARC.Util.Logging
         public LoggerAdaptor(IServiceProvider serviceProvider)
         {
             _sessionManager = serviceProvider.GetService<ISessionManager>();
-            _appName = serviceProvider.GetService<IConfiguration>().GetSection("AppParameters")?.GetValue<string>("AppName");
+            _appName = serviceProvider.GetService<IOptions<AppSettings>>().Value.API.Title;
+            
 
             var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
             _logger = loggerFactory.CreateLogger<T>();
