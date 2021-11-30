@@ -41,21 +41,21 @@ namespace R.ARC.Util.Logging.Contracts
             , string requestBody
             , Exception exception = null)
         {
-            AppName = appName;
+            AppName = appName != null ? appName: string.Empty ;
             LogTime = DateTime.UtcNow;
             EventId = eventId;
-            EventName = eventName;
+            EventName = eventName != null ? eventName : string.Empty;
             LogLevel = logLevel;
-            Category = categoryName;
-            Scope = scope;
-            Message = message;
+            Category = categoryName != null ? categoryName : string.Empty;
+            Scope = scope != null ? scope : string.Empty;
+            Message = message != null ? message : string.Empty;
             Exception = exception;
-            UserName = userName;
-            IpAddress = ipAddress;
-            MacAddress = macAddress;
-            HostName = hostName;
-            RequestUrl = requestUrl;
-            RequestBody = requestBody;
+            UserName = userName != null ? userName : string.Empty;
+            IpAddress = ipAddress != null ? ipAddress : string.Empty;
+            MacAddress = macAddress != null ? macAddress : string.Empty;
+            HostName = hostName != null ? hostName : string.Empty;
+            RequestUrl = requestUrl != null ? requestUrl : string.Empty;
+            RequestBody = requestBody != null ? requestBody : string.Empty;
         }
 
         public string AppName { get; set; }
