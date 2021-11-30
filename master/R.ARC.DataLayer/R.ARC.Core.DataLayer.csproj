@@ -23,4 +23,8 @@
     <ProjectReference Include="..\R.ARC.Core.Proxy\R.ARC.Core.Proxy.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

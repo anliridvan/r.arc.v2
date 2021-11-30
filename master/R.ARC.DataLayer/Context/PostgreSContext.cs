@@ -27,7 +27,7 @@ namespace R.ARC.Core.DataLayer.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                 optionsBuilder.UseNpgsql("Host=localhost:5342;Database=r_arc;Username=postgres;Password=12345");
+                 optionsBuilder.UseNpgsql("Host=localhost:5342;Database=r_arc;Username=postgres;Password=postgres");
             }
         }
 

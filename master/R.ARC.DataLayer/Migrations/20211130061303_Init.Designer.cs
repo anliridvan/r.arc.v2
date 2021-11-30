@@ -7,21 +7,27 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using R.ARC.Core.DataLayer.Context;
 
+#nullable disable
+
 namespace R.ARC.Core.DataLayer.Migrations
 {
     [DbContext(typeof(PostgreSContext))]
-    [Migration("20210805151910_Init")]
+    [Migration("20211130061303_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:PostgresExtension:uuid-ossp", ",,")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("Relational:Sequence:.seq_task_no", "'seq_task_no', '', '1111111111', '3', '', '', 'Int64', 'False'");
+                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.HasSequence("seq_task_no")
+                .StartsAt(1111111111L)
+                .IncrementsBy(3);
 
             modelBuilder.Entity("R.ARC.Core.Entity.AddressEntity", b =>
                 {
@@ -32,8 +38,8 @@ namespace R.ARC.Core.DataLayer.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("character varying(500)")
-                        .HasMaxLength(500);
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<int>("AddressType")
                         .HasColumnType("integer");
@@ -52,7 +58,7 @@ namespace R.ARC.Core.DataLayer.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
@@ -67,7 +73,7 @@ namespace R.ARC.Core.DataLayer.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");
@@ -77,7 +83,7 @@ namespace R.ARC.Core.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses","public");
+                    b.ToTable("Addresses", "public");
                 });
 
             modelBuilder.Entity("R.ARC.Core.Entity.AddressMappingEntity", b =>
@@ -99,7 +105,7 @@ namespace R.ARC.Core.DataLayer.Migrations
 
                     b.HasKey("CountryCode");
 
-                    b.ToTable("AddressMappings","public");
+                    b.ToTable("AddressMappings", "public");
 
                     b.HasData(
                         new
@@ -155,21 +161,21 @@ namespace R.ARC.Core.DataLayer.Migrations
                         .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<string>("AdditionalInfo")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<DateTime?>("EndTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ExtendedData")
                         .HasColumnType("text");
@@ -181,7 +187,7 @@ namespace R.ARC.Core.DataLayer.Migrations
                         .HasColumnType("bigint[]");
 
                     b.Property<DateTime?>("StartTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("TaskModelType")
                         .HasColumnType("integer");
@@ -202,11 +208,11 @@ namespace R.ARC.Core.DataLayer.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("character varying(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");
@@ -219,7 +225,7 @@ namespace R.ARC.Core.DataLayer.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Tasks","public");
+                    b.ToTable("Tasks", "public");
                 });
 
             modelBuilder.Entity("R.ARC.Core.Entity.UserEntity", b =>
@@ -233,7 +239,7 @@ namespace R.ARC.Core.DataLayer.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -260,33 +266,33 @@ namespace R.ARC.Core.DataLayer.Migrations
                         .HasColumnType("bytea");
 
                     b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users","public");
+                    b.ToTable("Users", "public");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ebb4e860-9a55-4518-9c8e-344c4883a69f"),
+                            Id = new Guid("2e5afee9-e189-41c1-a4f5-4e700f10eec6"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            CreationTime = new DateTime(2021, 8, 5, 15, 19, 10, 348, DateTimeKind.Utc).AddTicks(9261),
+                            CreationTime = new DateTime(2021, 11, 30, 6, 13, 3, 770, DateTimeKind.Utc).AddTicks(2224),
                             Email = "anliridvan@hotmail.com",
-                            ExtendedData = "{\"AddressList\":[{\"AddressType\":1,\"Address\":\"Cevirmeci / Ortakoy - Istanbul\",\"County\":\"Besiktas\",\"City\":\"Istanbul\",\"Region\":\"Marmara\",\"Country\":\"TR\",\"ZipCode\":34930,\"LevelCodeStr\":null,\"LevelCode\":null,\"LevelStr\":null,\"Level\":null,\"Id\":\"00000000-0000-0000-0000-000000000000\",\"CreatedBy\":\"00000000-0000-0000-0000-000000000000\",\"CreationTime\":\"2021-08-05T15:19:10.3492384Z\",\"UpdatedBy\":\"00000000-0000-0000-0000-000000000000\",\"UpdateTime\":null,\"IsDeleted\":false}]}",
+                            ExtendedData = "{\"AddressList\":[{\"AddressType\":1,\"Address\":\"Cevirmeci / Ortakoy - Istanbul\",\"County\":\"Besiktas\",\"City\":\"Istanbul\",\"Region\":\"Marmara\",\"Country\":\"TR\",\"ZipCode\":34930,\"LevelCodeStr\":null,\"LevelCode\":null,\"LevelStr\":null,\"Level\":null,\"Id\":\"00000000-0000-0000-0000-000000000000\",\"CreatedBy\":\"00000000-0000-0000-0000-000000000000\",\"CreationTime\":\"2021-11-30T06:13:03.7702226Z\",\"UpdatedBy\":\"00000000-0000-0000-0000-000000000000\",\"UpdateTime\":null,\"IsDeleted\":false}]}",
                             FirstName = "Ridvan",
                             IsDeleted = false,
                             LastName = "Anli",
-                            PasswordHash = new byte[] { 74, 106, 157, 73, 26, 132, 177, 251, 166, 238, 210, 5, 31, 14, 217, 214, 201, 6, 2, 180, 104, 130, 239, 243, 139, 151, 202, 233, 27, 79, 249, 115, 211, 206, 229, 191, 122, 151, 79, 211, 118, 89, 239, 234, 152, 214, 148, 47, 192, 198, 67, 243, 234, 79, 85, 203, 170, 73, 236, 201, 106, 223, 207, 61 },
-                            PasswordSalt = new byte[] { 66, 72, 117, 56, 131, 48, 131, 41, 231, 121, 167, 87, 59, 90, 142, 254, 132, 248, 197, 234, 191, 54, 185, 198, 129, 5, 109, 246, 49, 182, 158, 20, 15, 252, 223, 145, 4, 93, 237, 77, 115, 216, 19, 163, 196, 107, 221, 117, 188, 207, 178, 95, 37, 57, 168, 133, 111, 96, 191, 105, 153, 49, 22, 24, 72, 201, 149, 102, 151, 120, 119, 208, 150, 139, 136, 201, 6, 64, 228, 106, 136, 198, 45, 198, 145, 73, 57, 242, 229, 51, 126, 182, 21, 106, 141, 58, 179, 242, 32, 181, 83, 3, 245, 245, 24, 55, 204, 247, 74, 33, 137, 62, 22, 7, 83, 233, 236, 59, 250, 4, 96, 236, 46, 17, 63, 51, 132, 125 },
+                            PasswordHash = new byte[] { 166, 143, 177, 30, 223, 236, 9, 155, 81, 33, 60, 39, 191, 174, 43, 136, 135, 126, 24, 255, 147, 195, 205, 155, 4, 31, 127, 167, 41, 94, 86, 242, 212, 7, 71, 100, 83, 150, 230, 46, 193, 133, 121, 1, 135, 170, 232, 19, 191, 161, 120, 28, 166, 213, 175, 173, 243, 203, 142, 21, 76, 78, 38, 114 },
+                            PasswordSalt = new byte[] { 116, 207, 58, 93, 30, 236, 63, 119, 194, 207, 238, 178, 245, 247, 77, 68, 121, 183, 133, 141, 213, 181, 76, 208, 196, 182, 246, 228, 105, 154, 178, 17, 179, 2, 229, 104, 102, 194, 223, 243, 146, 223, 43, 137, 173, 85, 133, 113, 107, 53, 120, 78, 111, 34, 234, 178, 57, 33, 84, 169, 242, 92, 151, 124, 168, 107, 146, 232, 120, 21, 45, 89, 140, 160, 170, 202, 141, 160, 156, 188, 195, 208, 183, 54, 34, 196, 191, 161, 228, 112, 177, 236, 159, 38, 235, 91, 4, 168, 246, 47, 67, 108, 219, 22, 221, 203, 102, 33, 130, 134, 87, 212, 94, 202, 247, 243, 150, 162, 168, 93, 4, 71, 11, 212, 232, 73, 164, 57 },
                             UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             Username = "admin"
                         });
@@ -298,6 +304,8 @@ namespace R.ARC.Core.DataLayer.Migrations
                         .WithOne()
                         .HasForeignKey("R.ARC.Core.Entity.TaskEntity", "UserId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("MasterUser");
                 });
 #pragma warning restore 612, 618
         }
