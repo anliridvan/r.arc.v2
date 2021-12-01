@@ -25,13 +25,19 @@ namespace R.ARC.Web.Api.Autofac.Settings
             builder.RegisterType<ExceptionResultBuilder>().As<IExceptionResultBuilder>().InstancePerLifetimeScope();
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
             builder.RegisterType<GlobalExceptionFilter>().AsSelf().InstancePerLifetimeScope();
-
-
+           
             builder.Register(context =>
             {
                 var configuration = context.Resolve<IConfiguration>();
-                var issuerOptions = configuration.GetSection("AppSettings").GetSection("JwtIssuerOptions").Get<JwtIssuerOptions>();
+                var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
+                return new OptionsWrapper<AppSettings>(appSettings);
+            }).As<IOptions<AppSettings>>().SingleInstance();
 
+            builder.Register(context =>
+            {
+
+                var configuration = context.Resolve<IConfiguration>();
+                var issuerOptions = configuration.GetSection("AppSettings").GetSection("JwtIssuerOptions").Get<JwtIssuerOptions>();
 
                 var key = context.Resolve<JwtSigningKey>();
                 if (key == null)

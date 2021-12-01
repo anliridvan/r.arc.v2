@@ -75,9 +75,8 @@ namespace R.ARC.Web.Api.Settings.Swagger
         {
             get
             {
-                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
-                return Path.Combine(basePath, fileName);
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                return Path.Combine(AppContext.BaseDirectory, xmlFile);
             }
         }
     }
