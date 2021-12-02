@@ -17,7 +17,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using R.ARC.Common.Setting;
 using R.ARC.Core.Business;
-using R.ARC.Core.DataAccess;
 using R.ARC.Core.DataLayer;
 using R.ARC.Util.Logging;
 using R.ARC.Util.Logging.DbLog;
@@ -31,7 +30,6 @@ using SAM.Service.WebApi.Helpers;
 using System;
 using System.IO;
 using System.IO.Compression;
-using System.Text;
 
 namespace R.ARC.Web.Api
 {
@@ -222,7 +220,6 @@ namespace R.ARC.Web.Api
             try
             {
 
-                app.UseRouting();
 
                 app.UseFileServer();
 
@@ -238,6 +235,8 @@ namespace R.ARC.Web.Api
                     app.UseSpaStaticFiles();
                 }
                 #endregion
+
+                app.UseRouting();
                 #region UseForwardedHeaders
                 app.UseForwardedHeaders(new ForwardedHeadersOptions
                 {
@@ -261,6 +260,30 @@ namespace R.ARC.Web.Api
 
                 app.UseHttpsRedirection();
 
+                app.UseAuthorization();
+
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
+
+                #region Swagger -- To Enable Use Config / !Its Closing Spa Access 
+
+                if (_appSettings.IsValid() && _appSettings.Swagger.Enabled)
+                {
+                    app.ConfigureSwagger(provider);
+                    app.MapWhen(x => !x.Request.Path.Value.StartsWith("/swagger"), builder =>
+                    {
+                            //builder.UseMvc(routes =>
+                            //{
+                            //    //routes.MapAreaRoute(
+                            //    //    name: "spa-fallback",
+                            //    //    defaults: new { controller = "Home", action = "Index" });
+                            //});
+                        });
+                }
+                #endregion
+
                 #region Spa 
                 app.UseSpa(spa =>
                 {
@@ -275,19 +298,12 @@ namespace R.ARC.Web.Api
                     }
                 });
                 #endregion
+
                 app.UseCors(b => b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
                 app.UseResponseCompression();
                 app.UseAuthentication();
                 app.UseMiddleware(typeof(SetSessionMiddleware)); // *located for getting user info after JWT token read - ridvan
-                app.UseAuthorization();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
 
-                app.MapWhen(r => !r.Request.Path.Value.StartsWith("/swagger"), x =>{
-                    
-                });
 
 
                 app.UseRequestLocalization();
@@ -305,16 +321,7 @@ namespace R.ARC.Web.Api
                 //}
                 #endregion
 
-                #region Swagger
-
-                if (_appSettings.IsValid())
-                {
-                    if (_appSettings.Swagger.Enabled)
-                    {
-                        app.ConfigureSwagger(provider);
-                    }
-                }
-                #endregion
+    
 
             }
             catch (Exception ex)
@@ -323,8 +330,8 @@ namespace R.ARC.Web.Api
             }
         }
 
-      
 
-        
+
+
     }
 }
