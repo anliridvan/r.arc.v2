@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -19,7 +20,7 @@ namespace R.ARC.Web.Api.Controllers
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ApiError))]
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
     [ApiController]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class BaseController<T> : Controller
     {
         protected IMemoryCache MemoryCache;

@@ -19,7 +19,7 @@ namespace CoreAPI1.API.Controllers.V1
         }
 
         /// <summary>
-        ///     Secure method used to test security
+        ///     User Get
         /// </summary>
         /// <returns></returns>
         [HttpGet]
